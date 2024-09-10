@@ -1,0 +1,3 @@
+{"total": {"lines":{"total":56,"covered":45,"skipped":0,"pct":80.35},"statements":{"total":93,"covered":55,"skipped":0,"pct":59.13},"functions":{"total":20,"covered":16,"skipped":0,"pct":80},"branches":{"total":78,"covered":37,"skipped":0,"pct":47.43},"branchesTrue":{"total":0,"covered":0,"skipped":0,"pct":"Unknown"}}
+,"/home/shay/a/gscheng/ece461/ECE461/prototype_concurrency/index.js": {"lines":{"total":56,"covered":45,"skipped":0,"pct":80.35},"functions":{"total":20,"covered":16,"skipped":0,"pct":80},"statements":{"total":93,"covered":55,"skipped":0,"pct":59.13},"branches":{"total":78,"covered":37,"skipped":0,"pct":47.43}}
+}
