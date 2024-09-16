@@ -1,0 +1,9 @@
+export function isEven(x) {
+    if (x % 2 == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+//# sourceMappingURL=index.js.map

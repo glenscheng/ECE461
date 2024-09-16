@@ -1,19 +1,7 @@
-export function bar() {
-    if (true) {
-      return true;
-    } else {
-      return false;
-    }
-}
-  
-export async function barAsync() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        if (true) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      }, 1000);
-    });
+export function isEven(x: number) {
+  if (x % 2 == 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
