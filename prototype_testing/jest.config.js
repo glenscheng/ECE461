@@ -9,5 +9,5 @@ module.exports = {
     ],    
   collectCoverage: true, // Enable coverage collection
   coverageDirectory: 'coverage', // Output directory for coverage reports
-  // coverageReporters: ['text', 'lcov'], // Specify the format of the coverage report
+  coverageReporters: ['lcov'], // Specify the format of the coverage report
 };
