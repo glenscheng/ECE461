@@ -14,11 +14,15 @@ export function runWorker(data: number, string: string): Promise<number> {
         // Resolve the promise with the worker's result
         worker.on('message', (result) => {
             resolve(result);
+            worker.terminate(); // Terminate the worker after getting the result
         });
         //
 
         // Handle errors and exit
-        worker.on('error', reject);
+        worker.on('error', (error) => {
+            reject(error);
+            worker.terminate(); // Terminate the worker if an error occurs
+        });
         worker.on('exit', (code) => {
             if (code !== 0) {
                 reject(new Error(`Worker stopped with exit code ${code}`));
@@ -29,7 +33,7 @@ export function runWorker(data: number, string: string): Promise<number> {
 }
 
 // Example: running multiple workers
-export async function main() {
+const main = async () => {
     const worker1 = runWorker(1, "test1");
     const worker2 = runWorker(2, "test2");
     const worker3 = runWorker(3, "test3");
@@ -39,9 +43,8 @@ export async function main() {
     const results = await Promise.all([worker1, worker2, worker3, worker4, worker5]);
 
     console.log('Results from workers:', results);
+
+    return;
 }
 
-// Only run main if this file is being run directly
-if (require.main === module) {
-    main().catch(console.error);
-}
+main().catch(console.error);

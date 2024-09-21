@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.runWorker = runWorker;
-exports.main = main;
 var worker_threads_1 = require("worker_threads");
 // Function to create and manage worker threads
 function runWorker(data, string) {
@@ -51,10 +50,14 @@ function runWorker(data, string) {
         // Resolve the promise with the worker's result
         worker.on('message', function (result) {
             resolve(result);
+            worker.terminate(); // Terminate the worker after getting the result
         });
         //
         // Handle errors and exit
-        worker.on('error', reject);
+        worker.on('error', function (error) {
+            reject(error);
+            worker.terminate(); // Terminate the worker if an error occurs
+        });
         worker.on('exit', function (code) {
             if (code !== 0) {
                 reject(new Error("Worker stopped with exit code ".concat(code)));
@@ -64,27 +67,22 @@ function runWorker(data, string) {
     });
 }
 // Example: running multiple workers
-function main() {
-    return __awaiter(this, void 0, void 0, function () {
-        var worker1, worker2, worker3, worker4, worker5, results;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    worker1 = runWorker(1, "test1");
-                    worker2 = runWorker(2, "test2");
-                    worker3 = runWorker(3, "test3");
-                    worker4 = runWorker(4, "test4");
-                    worker5 = runWorker(5, "test5");
-                    return [4 /*yield*/, Promise.all([worker1, worker2, worker3, worker4, worker5])];
-                case 1:
-                    results = _a.sent();
-                    console.log('Results from workers:', results);
-                    return [2 /*return*/];
-            }
-        });
+var main = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var worker1, worker2, worker3, worker4, worker5, results;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                worker1 = runWorker(1, "test1");
+                worker2 = runWorker(2, "test2");
+                worker3 = runWorker(3, "test3");
+                worker4 = runWorker(4, "test4");
+                worker5 = runWorker(5, "test5");
+                return [4 /*yield*/, Promise.all([worker1, worker2, worker3, worker4, worker5])];
+            case 1:
+                results = _a.sent();
+                console.log('Results from workers:', results);
+                return [2 /*return*/];
+        }
     });
-}
-// Only run main if this file is being run directly
-if (require.main === module) {
-    main().catch(console.error);
-}
+}); };
+main().catch(console.error);
