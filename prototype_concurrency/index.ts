@@ -33,16 +33,27 @@ export function runWorker(data: number, info: string): Promise<number> {
 // Example: running multiple workers
 const main = async () => {
     // CREATE ALL WORKERS
-    const worker1 = runWorker(1, "test1");
-    const worker2 = runWorker(2, "test2");
-    const worker3 = runWorker(3, "test3");
-    const worker4 = runWorker(4, "test4");
-    const worker5 = runWorker(5, "test5");
+    const busFactorWorker = runWorker(1, "bus factor");
+    const correctnessWorker = runWorker(2, "correctness");
+    const rampUpWorker = runWorker(3, "ramp up");
+    const responsivenessWorker = runWorker(4, "responsiveness");
+    const licenseWorker = runWorker(5, "license");
 
     // WAIT FOR THE WORKERS TO ALL FINISH
-    const results = await Promise.all([worker1, worker2, worker3, worker4, worker5]);
+    const results = await Promise.all([busFactorWorker, correctnessWorker, rampUpWorker, responsivenessWorker, licenseWorker]);
 
-    console.log('Results from workers:', results);
+    // PARSE RESULTS
+    let busFactorResults = results[0];
+    let correctnessResults = results[1];
+    let rampUpResults = results[2];
+    let responsivenessResults = results[3];
+    let licenseResults = results[4];
+
+    console.log('Bus factor results:', busFactorResults);
+    console.log('Correctness results:', correctnessResults);
+    console.log('Ramp up results:', rampUpResults);
+    console.log('Responsiveness results:', responsivenessResults);
+    console.log('License results:', licenseResults);
 
     return;
 }
