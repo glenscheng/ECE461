@@ -2,12 +2,17 @@ const { parentPort } = require('worker_threads');
 
 // Worker function that computes something
 parentPort?.on('message', (params) => {
-    const { data, string } = params;
-    console.log(data, string);
+    // PARSE PARAMETERS
+    const { data, info } = params;
+    console.log(data, info);
+    
+    // COMPUTE SOMETHING
     let result = 0;
     for (let i = 0; i <= data; i++) {
         result += i;
     }
+
+    // RETURN SOMETHING
     parentPort?.postMessage({
         result: result,
         timestamp: Date.now()
